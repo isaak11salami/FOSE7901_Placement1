@@ -1,0 +1,91 @@
+#Clear the evironment
+rm(list = ls())
+
+#SetUp Fonts
+library(extrafont)
+fonts()
+
+#Generating a bar plot of dry weight data
+library(readr)
+mass <- read_csv("mass.data.csv")
+View(mass)
+#Calculate the mean mass for each nodulation group
+group.means <- tapply(mass$Mass,mass$Group,mean)
+group.means
+#Reorder vector
+group.means <- group.means[c("-ve Controls", "Inoculated", "Nodules", "Nodules/Bumps", "Bumps")]
+group.means
+
+#Count the number of samples for each nodulation group
+group.ns <- tapply(mass$Mass,mass$Group,length)
+#Reorder vector
+group.ns <- group.ns[c("-ve Controls", "Inoculated", "Nodules", "Nodules/Bumps", "Bumps")]
+group.ns
+
+#Calculate the standard error for the mean masses of each nodulation group
+group.ses <- tapply(mass$Mass,mass$Group,sd)/sqrt(group.ns) 
+#Reorder vector
+group.ses <- group.ses[c("-ve Controls", "Inoculated", "Nodules", "Nodules/Bumps", "Bumps")]
+group.ses
+
+#Calculate 95%CI
+w.lowerci <- group.means - group.ses*qt(0.025,df=group.ns-1)
+w.lowerci
+w.upperci <- group.means + group.ses*qt(0.975,df=group.ns-1)
+w.upperci
+group.means
+#Make the barplot
+groups <- c("-ve Controls", "Inoculated", "Nodules", "Nodules/Bumps", "Bumps")
+barx<-barplot(group.means,names.arg=groups, col='gray', beside=T, ylab='Avg Dried Mass (mg)', 
+              xlab='Inoculation and Nodulation state',ylim=c(0,max(group.means)+max(group.ses)),
+              width=0.3,cex.names=0.8,xpd=FALSE,las=1, family="Times New Roman")
+arrows(barx,group.means-group.ses, barx, group.means+group.ses, 
+       angle=90, code=3, length=0.1)
+box()
+dev.off()
+
+#Generate a clustered bar plot for the nodule assay
+#SetUp Fonts
+
+
+library(readr)
+nod <- read_csv("nodule.data.csv")
+View(nod)
+nod
+#nod is a mix of numeric and non-numeric data. We need to convert to
+#numeric data only for it to be recognised by the barplot() function
+
+# Remove the first column (labels) and convert the remaining data to numeric
+?apply
+nod_numeric=apply(nod[, -1], 2, as.numeric)
+nod_numeric
+nod=nod_numeric
+nod
+
+nod=matrix(nod_numeric, nrow = 2, byrow=FALSE)
+nod
+
+sampleID <- c("L-1","L-2","L-3","L+1","L+2","L+3","L+4","L+5","L+6","L+7")
+sampleID
+barc=barplot(nod,beside=T,names.arg=sampleID,col= c("red", "orange"),
+            xlab= expression(paste(italic("L.rectus")," subjects")), 
+            ylab= "No. of observations",ylim=c(0,7), width=0.3, 
+            cex.names=0.8, family="Times New Roman")
+legend("topright",legend= c("Nodules", "Bumps"),fill= c("red", "orange"),cex= 0.8)
+box()
+
+#Determining whether there's a significant difference in dried weight between the 
+#Negative control plants and the plants that displayed nodules
+controls <- c(3.5, 5, 5)
+nodules <- c(5, 3, 5)
+t.test(controls, nodules)
+
+#Determining whether there's a significant difference in nodule count between
+#inoculated and negative controls
+controls <- c(0, 1, 4, 3, 0, 0)
+nodules <- c(0, 0, 0)
+t.test(controls, nodules)
+
+#Obtaining R Studio citation
+RStudio.Version()
+
