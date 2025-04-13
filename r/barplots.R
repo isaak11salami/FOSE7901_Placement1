@@ -7,7 +7,7 @@ par(family = "Times New Roman")
 
 #Start by setting the working directory
 
-setwd("~/Uni/2025/Session 1/Placements_FOSE7901/Placement 1/Deliverables/r/raw")
+setwd("~/Uni/2025/Session 1/Placements_FOSE7901/Placement 1/Deliverables/r/data/raw")
 
 #Generate clustered bar plots of nodule and bump counts for each plant species 
 #(L4, L7 and L8)
