@@ -311,8 +311,3 @@ arrows(bumpo.pos, bumpo.means - bumpo.ses, bumpo.pos, bumpo.means
 #Of course, there's no CI for L. australis as there was only ONE plant with only
 #bumps. Hence, no variation/error in the mean 
 
-
-
-
-
-
