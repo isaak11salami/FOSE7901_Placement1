@@ -1,5 +1,6 @@
 #Let's conduct an anova to look for differences in average weight between 
 #treatment groups
+library(readr)
 groupedweights <- read_csv("weightsforaov.csv")
 View(groupedweights)
 groupedweights
@@ -13,6 +14,8 @@ nod.model
 #Test the model for ANOVA assumptions
 #1) Homogeneity of Variance, via...
 #Levene Test
+library(car)
+
 leveneTest(nod.model)
 #Plot Residuals against Fitted values
 plot(nod.model)
