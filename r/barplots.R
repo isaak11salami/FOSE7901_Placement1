@@ -26,30 +26,6 @@ L8nod
 
 L8nod=matrix(L8nod, nrow = 2, byrow=FALSE)
 L8nod
-
-sampleID <- c("L8-1","L8-2","L8-3","L8+1","L8+2","L8+3","L8+4","L8+5","L8+6","L8+7")
-sampleID
-L8bar=barplot(L8nod,beside=T,names.arg=sampleID,col= c("red", "orange"),
-             xlab= expression(paste(italic("L.rectus")," plants")), 
-             ylab= "No. of observations",ylim=c(0,7), width=0.3, 
-             cex.names=0.8)
-legend("topright",legend= c("Nodules", "Bumps"),fill= c("red", "orange"),cex= 0.8)
-box()
-
-#Start with L.rectus (L8)
-library(readr)
-L8nod <- read_csv("L8nodules.csv")
-View(L8nod)
-L8nod
-#L8nod is a mix of numeric and non-numeric data. We need to convert to
-#numeric data only for it to be recognised by the barplot() function
-
-# Remove the first column (labels) and convert the remaining data to numeric
-L8nod=apply(L8nod[, -1], 2, as.numeric)
-L8nod
-
-L8nod=matrix(L8nod, nrow = 2, byrow=FALSE)
-L8nod
 L8ID <- c("L8-1","L8-2","L8-3","L8+1","L8+2","L8+3","L8+4","L8+5","L8+6","L8+7")
 L8ID
 L8bar=barplot(L8nod,beside=T,names.arg=L8ID,col= c("red", "orange"),
@@ -99,7 +75,7 @@ L7nod
 L7ID <- c("L7-2","L7-3","L7-4","L7+1","L7+2","L7+3","L7+4","L4+5","L4+6")
 L7ID
 L7bar=barplot(L7nod,beside=T,names.arg=L7ID, col= c("red", "orange"),
-              xlab= expression(paste(italic("L.australis")," plants")), 
+              xlab= expression(paste(italic("L.uliginosus")," plants")), 
               ylab= "No. of observations",ylim=c(0,30), width=0.3, 
               cex.names=0.8)
 legend("topright",legend= c("Nodules", "Bumps"),fill= c("red", "orange"),cex= 0.8)
@@ -162,8 +138,8 @@ spID=c("Nodules","Bumps")
 spID
 
 nbbar=barplot(nbmeans,beside=T,names.arg=spID, col= c("lightgreen", "green3", "darkgreen"),
-              xlab= expression(paste("Symbisis indicator")), 
-              ylab= "Average no. of Observations",ylim=c(0,20), width=0.3, 
+              xlab= expression(paste("symbiosis indicator")), 
+              ylab= "count",ylim=c(0,20), width=0.3, 
               cex.names=0.8)
 legend("topright",c(expression(paste(italic("L. australis"))),
                     expression(paste(italic("L. uliginosus"))),
@@ -274,13 +250,13 @@ weight.means = cbind(nonod.means,nodbump.means,nodpl.means,bumpo.means)
 weight.means
 
 #Set up the barplot!
-wID=c("No Nodules","Nodules & Bumps","Nodules","Bumps Only")
+wID=c("No Nodules","Nodules &/or Bumps","Nodules","Bumps Only")
 wID
 
 wbar=barplot(weight.means,beside=T,names.arg=wID, 
              col= c("lightgreen", "green3", "darkgreen"),
-              xlab= expression(paste("Nodulation State")), 
-              ylab= "Average Weight (mg)",ylim=c(0,8), width=0.3, 
+              xlab= expression(paste("nodulation state")), 
+              ylab= "dry foliage weight (mg)",ylim=c(0,8), width=0.3, 
               cex.names=0.8)
 legend("topright",c(expression(paste(italic("L. australis"))),
                     expression(paste(italic("L. uliginosus"))),
