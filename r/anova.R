@@ -1,5 +1,7 @@
 #Let's conduct an anova to look for differences in average weight between 
 #treatment groups
+setwd("~/Uni/2025/Session 1/Placements_FOSE7901/Placement 1/Deliverables/r/data/raw")
+
 library(readr)
 groupedweights <- read_csv("weightsforaov.csv")
 View(groupedweights)
@@ -24,18 +26,7 @@ plot(nod.model)
 #Mostly okay, though not perfect. Let's run the ANOVA and see how it looks
 anova(nod.model)
 
-#Let's do another ONE-Way, but now sort by species
-sp.model=lm(weight~species, groupedweights)
-sp.model
-#Test the assumptions
-#Levene Test
-leveneTest(sp.model)
-#Plot Residuals against Fitted values
-plot(sp.model)
-#Look to the Q-Q plot to assess normality of variance 
 
-#Again, just mostly okay. Run the ANOVA anyway
-anova(sp.model)
 
 
 
