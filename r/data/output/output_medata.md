@@ -1,1 +1,1 @@
-This folder contains the plots generated from R Studio during data analysis for this project
+This folder contains the plots generated from R Studio during data analysis for this project.
